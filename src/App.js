@@ -13,14 +13,16 @@ const App = () => {
 
   useEffect(() => {
     const getUserState = user => {
-      setUser(user.currentUser)
+      setUser(user)
       console.log(user)
     }
-    auth.onAuthStateChanged(getUserState)
-  })
+    const unsubscribeFromAuth = auth.onAuthStateChanged(getUserState)
+    return () => unsubscribeFromAuth
+  
+  }, [])
   return (
     <div>
-      <Header />
+      <Header currentUser={currentUser} />
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/shop' component={ShopPage} />
