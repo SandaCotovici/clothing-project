@@ -24,11 +24,12 @@ const SignIn = () => {
   return (
     <div className='sign-in-page'>
       <h1>I have already an account</h1>
-      <form onSUbmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <FormInput
           type="email"
           name="email"
           value={email}
+          autoComplete="username"
           required
           handleChange={e => setEmail(e.target.value)}
           label="Email" />
@@ -37,6 +38,7 @@ const SignIn = () => {
           type="password"
           name="password"
           value={password}
+          autoComplete="current-password"
           required
           handleChange={e => setPassword(e.target.value)}
           label="Password" />
