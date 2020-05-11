@@ -12,13 +12,18 @@ const initialData =
 }
 
 const SignIn = () => {
-  const [email, setEmail] = useState(initialData.email);
-  const [password, setPassword] = useState(initialData.password);
+  const [user, setUser] = useState(initialData);
+  const { email, password } = user
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setEmail('');
-    setPassword('');
+    setUser(initialData);
+  }
+  const handleChange = e => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
+    })
   }
 
   return (
@@ -31,7 +36,7 @@ const SignIn = () => {
           value={email}
           autoComplete="username"
           required
-          handleChange={e => setEmail(e.target.value)}
+          handleChange={handleChange}
           label="Email" />
 
         <FormInput
@@ -40,7 +45,7 @@ const SignIn = () => {
           value={password}
           autoComplete="current-password"
           required
-          handleChange={e => setPassword(e.target.value)}
+          handleChange={handleChange}
           label="Password" />
         <div className='buttons'>
           <CustomButton>Sign In</CustomButton>

@@ -27,7 +27,7 @@ const App = () => {
       } else {
         setUser(userAuth)
       }
-
+      console.log('user', currentUser)
     }
     const unsubscribeFromAuth = auth.onAuthStateChanged(getUserState)
     return () => unsubscribeFromAuth
