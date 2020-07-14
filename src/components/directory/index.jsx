@@ -38,7 +38,7 @@ const initialSections = [
 ];
 
 const Directory = () => {
-
+// using hooks
   const [sections] = useState(initialSections);
 
   return (

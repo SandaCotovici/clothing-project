@@ -9,6 +9,7 @@ import Header from './components/header'
 import SignInSignUpPage from './pages/signIn-and-SignUp';
 
 const App = () => {
+  // here app is using hooks
   const [currentUser, setUser] = useState(null)
 
   useEffect(() => {

@@ -12,6 +12,7 @@ const initialData =
 }
 
 const SignIn = () => {
+  // using hooks
   const [user, setUser] = useState(initialData);
   const { email, password } = user
 

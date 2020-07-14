@@ -13,6 +13,7 @@ const SignUp = () => {
     password: '',
     confirmPassword: ''
   }
+  // using hooks
   const [newUser, setNewUser] = useState(initialState)
 
   const { displayName, email, password, confirmPassword } = newUser

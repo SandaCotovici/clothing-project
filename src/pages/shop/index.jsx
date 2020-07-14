@@ -3,7 +3,7 @@ import SHOP_DATA from './data'
 import CollectionPreview from '../../components/collection-preview'
 
 const ShopPage = () => {
-
+// using hooks
   const [collections] = useState(SHOP_DATA)
 
   return (
