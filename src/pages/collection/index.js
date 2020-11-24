@@ -3,7 +3,11 @@ import { useSelector } from 'react-redux'
 import { selectCollection } from '../../redux/shop/selectors'
 import CollectionItem from '../../components/collection-item'
 
-import './styles.scss'
+import {
+  CollectionPageContainer,
+  ItemsContainer,
+  TitleContainer,
+} from './styles'
 
 const CollectionPage = ({ match }) => {
   const collection = useSelector(selectCollection(match.params.collectionId))
@@ -11,10 +15,14 @@ const CollectionPage = ({ match }) => {
   const { title, items } = collection
 
   return (
-    <div className="collection-page">
-      <h2 className="title">{title}</h2>
-      <div className="items">{items.map(item => <CollectionItem key={item.id} item={item} />)}</div>
-    </div>
+    <CollectionPageContainer>
+      <TitleContainer>{title}</TitleContainer>
+      <ItemsContainer>
+        {items.map((item) => (
+          <CollectionItem key={item.id} item={item} />
+        ))}
+      </ItemsContainer>
+    </CollectionPageContainer>
   )
 }
 

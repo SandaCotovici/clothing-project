@@ -4,20 +4,17 @@ import { useSelector } from 'react-redux'
 
 import { selectCartItemsQuantity } from '../../redux/cart/selectors'
 import { toggleCartHidden } from '../../redux/cart/actions'
-
-import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg'
-
-import './styles.scss'
+import { CartIconContainer, ItemCountContainer, ShoppingIcon } from './styles'
 
 const CartIcon = ({ toggleCartHidden }) => {
   // use Selector with hook
   const itemQuantity = useSelector(selectCartItemsQuantity)
 
   return (
-    <div className="cart-icon" onClick={toggleCartHidden}>
+    <CartIconContainer onClick={toggleCartHidden}>
       <ShoppingIcon className="shopping-icon" />
-      <span className="item-count">{itemQuantity}</span>
-    </div>
+      <ItemCountContainer>{itemQuantity}</ItemCountContainer>
+    </CartIconContainer>
   )
 }
 
