@@ -6,7 +6,10 @@ import CollectionPage from '../collection'
 
 import { fetchCollectionsStartAsync } from '../../redux/shop/actions'
 import WithSpinner from '../../components/with-spinner'
-import { selectIsCollectionFetching, selectIsCollectionsLoaded } from '../../redux/shop/selectors'
+import {
+  selectIsCollectionFetching,
+  selectIsCollectionsLoaded,
+} from '../../redux/shop/selectors'
 
 const CollectionsOverviewWithSpinner = WithSpinner(CollectionOverview)
 const CollectionPageWithSpinner = WithSpinner(CollectionPage)
