@@ -1,41 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import CollectionOverview from '../../components/collections-overview'
 import { Route } from 'react-router-dom'
 import CollectionPage from '../collection'
-import {
-  firestore,
-  convertCollectionsSnapshotToMap,
-} from '../../firebase/utils'
-import { updateCollections } from '../../redux/shop/actions'
+
+import { fetchCollectionsStartAsync } from '../../redux/shop/actions'
 import WithSpinner from '../../components/with-spinner'
+import { selectIsCollectionFetching, selectIsCollectionsLoaded } from '../../redux/shop/selectors'
 
 const CollectionsOverviewWithSpinner = WithSpinner(CollectionOverview)
 const CollectionPageWithSpinner = WithSpinner(CollectionPage)
 
 const ShopPage = ({ match }) => {
   const dispatch = useDispatch()
-  const [isLoading, setIsLoading] = useState(true)
+  const isCollectionFetching = useSelector(selectIsCollectionFetching)
+  const isCollectionLoaded = useSelector(selectIsCollectionsLoaded)
 
   useEffect(() => {
-    const collectionRef = firestore.collection('collections')
-
-    // solution to fetch data from firebase db:
-    // fetch(
-    //   'https://firestore.googleapis.com/v1/projects/clooothing-shop515/databases/(default)/documents/collections'
-    // )
-    //   .then((response) => response.json())
-    //   .then((collections) => console.log(collections))
-
-    const getCollectionsMap = (snapshot) => {
-      const collectionsMap = convertCollectionsSnapshotToMap(snapshot)
-      dispatch(updateCollections(collectionsMap))
-      setIsLoading(false)
-    }
-
-    const unsubscribeFromSnapshot = collectionRef.get().then(getCollectionsMap)
-    return () => unsubscribeFromSnapshot
-  }, [])
+    dispatch(fetchCollectionsStartAsync())
+  }, [dispatch])
 
   return (
     <div className="shop-page">
@@ -43,13 +26,19 @@ const ShopPage = ({ match }) => {
         exact
         path={`${match.path}`}
         render={(props) => (
-          <CollectionsOverviewWithSpinner isLoading={isLoading} {...props} />
+          <CollectionsOverviewWithSpinner
+            isLoading={isCollectionFetching}
+            {...props}
+          />
         )}
       />
       <Route
         path={`${match.path}/:collectionId`}
         render={(props) => (
-          <CollectionPageWithSpinner isLoading={isLoading} {...props} />
+          <CollectionPageWithSpinner
+            isLoading={!isCollectionLoaded}
+            {...props}
+          />
         )}
       />
     </div>
