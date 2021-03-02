@@ -4,7 +4,7 @@ import CollectionOverview from '../../components/collections-overview'
 import { Route } from 'react-router-dom'
 import CollectionPage from '../collection'
 
-import { fetchCollectionsStartAsync } from '../../redux/shop/actions'
+import { fetchCollectionsStart } from '../../redux/shop/actions'
 import WithSpinner from '../../components/with-spinner'
 import {
   selectIsCollectionFetching,
@@ -20,7 +20,7 @@ const ShopPage = ({ match }) => {
   const isCollectionLoaded = useSelector(selectIsCollectionsLoaded)
 
   useEffect(() => {
-    dispatch(fetchCollectionsStartAsync())
+    dispatch(fetchCollectionsStart())
   }, [dispatch])
 
   return (
