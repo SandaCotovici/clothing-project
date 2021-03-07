@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import SHOP_DATA from '../../redux/shop/data'
+import React from 'react'
 import './styles.scss'
 import CollectionPreview from '../collection-preview'
 import { selectCollectionsForPreview } from '../../redux/shop/selectors'

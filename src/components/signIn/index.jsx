@@ -18,7 +18,8 @@ const SignIn = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    dispatch(emailSignInStart(email, password))
+
+    dispatch(emailSignInStart(user))
   }
   const handleChange = (e) => {
     setUser({
@@ -26,8 +27,6 @@ const SignIn = () => {
       [e.target.name]: e.target.value,
     })
   }
-
-  // const handleClick = () => dispatch(googleSignInStart())
 
   return (
     <div className="sign-in-page">

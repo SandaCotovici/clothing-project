@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import './App.css'
@@ -13,25 +13,14 @@ import SignInSignUpPage from './pages/signIn-and-SignUp'
 
 import { selectCurrentUser } from './redux/user/selectors'
 import { selectCollectionsForPreview } from './redux/shop/selectors'
+import { checkUserSession } from './redux/user/actions'
 
 const App = (props) => {
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    // const getUserState = async (userAuth) => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth)
-    //     userRef.onSnapshot((snapShot) => {
-    //       setCurrentUser({
-    //         id: snapShot.id,
-    //         ...snapShot.data(),
-    //       })
-    //     })
-    //   } else {
-    //     setCurrentUser(userAuth)
-    //   }
-    // }
-    // const unsubscribeFromAuth = auth.onAuthStateChanged(getUserState)
-    // return () => unsubscribeFromAuth
-  }, [])
+    dispatch(checkUserSession())
+  }, [dispatch])
   return (
     <div>
       <Header />
