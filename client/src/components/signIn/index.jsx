@@ -21,10 +21,12 @@ const SignIn = () => {
 
     dispatch(emailSignInStart(user))
   }
-  const handleChange = (e) => {
+  const handleChange = (event) => {
+    const { name, value } = event.target
+
     setUser({
       ...user,
-      [e.target.name]: e.target.value,
+      [name]: value,
     })
   }
 
