@@ -3,13 +3,13 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import './App.css'
-
 import HomePage from './pages/homepage'
 import ShopPage from './pages/shop'
 import Header from './components/header'
 import CheckoutPage from './pages/checkout'
 import SignInSignUpPage from './pages/signIn-and-SignUp'
+
+import { GlobalStyle } from './global.styles'
 
 import { selectCurrentUser } from './redux/user/selectors'
 import { selectCollectionsForPreview } from './redux/shop/selectors'
@@ -23,6 +23,7 @@ const App = (props) => {
   }, [dispatch])
   return (
     <div>
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
